@@ -1,5 +1,6 @@
 const fs = require('fs').promises;
 
+
 console.log("Starts")
 
 const a = 100;
@@ -22,10 +23,9 @@ console.log("Ends")
 
 
 /* 
-* Start
-* End
+* Starts
+* a= 100
+* Ends
 * Timer Expired
-* File Reading CB
 * setImmediate
-* a=100
 */
