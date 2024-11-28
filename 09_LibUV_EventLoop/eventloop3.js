@@ -10,12 +10,24 @@ setTimeout(()=> console.log("Timer Expired"), 0)
 
 Promise.resolve("Promise").then(console.log)
 
-fs.readFile("./file.txt", "utf8", () => {
-    setTimeout(()=> console.log("2nd Timer Expired"), 0)
-    process.nextTick(()=> console.log("Process.netTick 2"))
-    setImmediate(()=> console.log("2nd setImmediate"))
-    console.log("File Reading CB")
-})
+// fs.readFile("./file.txt", "utf8", () => {
+//     setTimeout(()=> console.log("2nd Timer Expired"), 0)
+//     process.nextTick(()=> console.log("Process.netTick 2"))
+//     setImmediate(()=> console.log("2nd setImmediate"))
+//     console.log("File Reading CB")
+// })
+
+fs.readFile("./file.txt", "utf8")
+  .then((data) => {
+    // Simulating your callback behavior
+    setTimeout(() => console.log("2nd Timer Expired"), 0);
+    process.nextTick(() => console.log("Process.netTick 2"));
+    setImmediate(() => console.log("2nd setImmediate"));
+    console.log("File Reading CB");
+  })
+  .catch((err) => {
+    console.error("Error reading file:", err.message);
+  });
 
 process.nextTick(()=> console.log("Process.netTick"))
 
@@ -36,8 +48,8 @@ Process.nextTick
 Promise
 Timer Expired
 setImmediate
-    Process.netTick 2
-    2nd Timer Expired
-    2nd setImmediate
     File Reading CB
+    Process.netTick 2
+    2nd setImmediate
+    2nd Timer Expired
 */

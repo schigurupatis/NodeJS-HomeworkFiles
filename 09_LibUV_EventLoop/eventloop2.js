@@ -8,15 +8,17 @@ setImmediate(()=> console.log("setImmediate"))
 
 Promise.resolve("Promise").then(console.log)
 
-fs.readFile("./file.txt", "utf8", () => {
+// fs.readFile("./file.txt", "utf8", () => {
+//     console.log("File Reading CB")
+// })
+
+fs.readFile("./file.txt", "utf8")
+.then((data)=> {
     console.log("File Reading CB")
-})
-// try {
-//     const data = fs.readFile('./file.txt', 'utf8');
-//     console.log("File Reading CB:", data);
-//   } catch (error) {
-//     console.error("Error reading file:", error);
-//   }
+}).catch((err) => {
+    console.error("Error reading file:", err.message);
+});
+
 
 setTimeout(()=> console.log("Timer Expired"), 0)
 
